@@ -48,10 +48,9 @@ pipeline {
 		stage('Showing Results Add-Sub') {
             		steps {
                 		echo 'Showing results'
-				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_add_results.xml'])
+				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_*_results.xml'])
 				step([$class: 'JUnitResultArchiver', checksName: 'Tests', testResults: 'Junit_fitnesse_suite_add_results.xml'])
 				sleep 2
-				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_sub_results.xml'])
 				step([$class: 'JUnitResultArchiver', checksName: 'Tests', testResults: 'Junit_fitnesse_suite_sub_results.xml'])
 
 				
