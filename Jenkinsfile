@@ -15,7 +15,7 @@ pipeline {
 				stage('Addition') {
 					steps{
 						echo 'Executing Suite'
-						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: '', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=0', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_Add_results.xml', fitnesseUsername: '']])
+						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: '', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=0', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_results.xml', fitnesseUsername: '']])
 
 					}
 				}
@@ -23,7 +23,7 @@ pipeline {
 				stage('Subtraction') {
 					steps{
 						echo 'Executing Suite'
-						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: '', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=3', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_sub_results.xml', fitnesseUsername: '']])
+						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: '', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=3', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_results.xml', fitnesseUsername: '']])
 
 					}
 				}
@@ -46,23 +46,13 @@ pipeline {
 			}
 		}
 		stage('Showing Results Add-Sub') {
-            steps {
-                echo 'Showing results'
+            		steps {
+                		echo 'Showing results'
 
-				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_add_results.xml'])
-		    	sleep 2
-		    	step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_sub_results.xml'])
+				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_results.xml'])
 		    	
 			}
 		}
-		stage('Showing Results Mul.Div') {
-            steps {
-                echo 'Showing results'
-
-				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_mul_results.xml'])
-		    	sleep 2
-		    	step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_div_results.xml'])
-			}
-		}
+		
     }
 }
