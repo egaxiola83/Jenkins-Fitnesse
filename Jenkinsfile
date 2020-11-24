@@ -49,7 +49,8 @@ pipeline {
             		steps {
                 		echo 'Showing results'
 
-				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_results.xml'])
+				build 'ShowAdd'
+				build 'ShowSub'
 		    	
 			}
 		}
