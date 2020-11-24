@@ -23,7 +23,7 @@ pipeline {
 				stage('Subtraction') {
 					steps{
 						echo 'Executing Suite'
-						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: 'Junit_fitnesse_suite_add_results.xml', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=3', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_sub_results.xml', fitnesseUsername: '']])
+						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: 'Junit_fitnesse_suite_sub_results.xml', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=3', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_sub_results.xml', fitnesseUsername: '']])
 
 					}
 				}
@@ -50,9 +50,11 @@ pipeline {
                 		echo 'Showing results'
 				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_add_results.xml'])
 				step([$class: 'JUnitResultArchiver', checksName: 'Tests', testResults: 'Junit_fitnesse_suite_add_results.xml'])
+				sleep 2
+				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_sub_results.xml'])
+				step([$class: 'JUnitResultArchiver', checksName: 'Tests', testResults: 'Junit_fitnesse_suite_sub_results.xml'])
 
-				build 'ShowAdd'
-				build 'ShowSub'
+				
 		    	
 			}
 		}
