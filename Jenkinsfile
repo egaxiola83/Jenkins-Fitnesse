@@ -1,3 +1,5 @@
+
+
 pipeline {
     agent any
 
@@ -9,51 +11,57 @@ pipeline {
 		}
 		stage('Run Tests'){
 			parallel{
-				
+
 				stage('Addition') {
 					steps{
 						echo 'Executing Suite'
 						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: '', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=0', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_Add_results.xml', fitnesseUsername: '']])
-						
+
 					}
 				}
-				
+
 				stage('Subtraction') {
 					steps{
 						echo 'Executing Suite'
 						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: '', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=3', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_sub_results.xml', fitnesseUsername: '']])
-						
+
 					}
 				}
-				
+
 				stage('Multiplication') {
 					steps{
 						echo 'Executing Suite'
 						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: '', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=2', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_mul_results.xml', fitnesseUsername: '']])
-						
+
 					}
 				}
-				
+
 				stage('Division') {
 					steps{
 						echo 'Executing Suite'
 						step([$class: 'FitnesseBuilder', options: [fitnesseStart: 'False', fitnessePathToJunitResultsOut: '', fitnesseHost: 'localhost', fitnessePassword: '', fitnesseHttpTimeout: '', fitnesseEnableSsl: 'false', fitnesseTestTimeout: '', fitnesseTargetIsSuite: 'false', fitnessePortRemote: '8080', fitnesseTargetPage: 'FrontPage.fitnessetest.SuitePage?suite&partitionCount=4&partitionIndex=1', fitnessePathToXmlResultsOut: 'C:\\Fitnesse\\fitnesse_suite_div_results.xml', fitnesseUsername: '']])
-						
+
 					}
 				}
 			}
 		}
-		stage('Showing Results') {
+		stage('Showing Results Add-Sub') {
             steps {
                 echo 'Showing results'
-				
+
 				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_add_results.xml'])
-		    		sleep 2
-		    		step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_sub_results.xml'])
-		    		sleep 2
-		    		step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_mul_results.xml'])
-		    		sleep 2
-		    		step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_div_results.xml'])
+		    	sleep 2
+		    	step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_sub_results.xml'])
+		    	
+			}
+		}
+		stage('Showing Results Mul.Div') {
+            steps {
+                echo 'Showing results'
+
+				step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_mul_results.xml'])
+		    	sleep 2
+		    	step([$class: 'FitnesseResultsRecorder', fitnessePathToXmlResultsIn: 'C:\\Fitnesse\\fitnesse_suite_div_results.xml'])
 			}
 		}
     }
